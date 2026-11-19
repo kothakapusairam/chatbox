@@ -1,0 +1,657 @@
+{
+  "intents": [
+    {
+      "intent": "greeting",
+      "patterns": [
+        "hi",
+        "hello",
+        "hey there",
+        "good morning",
+        "good afternoon",
+        "good evening",
+        "hey",
+        "greetings",
+        "hello assistant",
+        "is anyone here?",
+        "start chat",
+        "howdy",
+        "hi support",
+        "hey bot",
+        "hello there",
+        "hi can you help me",
+        "good day",
+        "yo",
+        "hey buddy",
+        "hello support team",
+        "anyone available to assist?",
+        "hi i need some help",
+        "hello how are you",
+        "hello, how are you?",
+        "how are you doing",
+        "how are you"
+      ],
+      "responses": [
+        "Hello! Welcome to Customer Support. I'm your virtual assistant. How can I assist you today?",
+        "Hi there! Welcome to support. How may I help you with your order, account, or questions today?",
+        "Greetings! I'm here to assist you with orders, returns, refunds, payments, and account inquiries. What can I do for you?"
+      ]
+    },
+    {
+      "intent": "goodbye",
+      "patterns": [
+        "bye",
+        "goodbye",
+        "see you later",
+        "have a good day",
+        "farewell",
+        "talk to you later",
+        "cya",
+        "that is all for now bye",
+        "im leaving now",
+        "good night",
+        "thanks bye",
+        "catch you later",
+        "exit chat",
+        "end conversation",
+        "no more questions bye",
+        "have a nice day",
+        "bye for now",
+        "logging off",
+        "see ya",
+        "that's all, bye",
+        "goodbye and thanks for the help",
+        "ok bye then",
+        "I'm done, thanks bye",
+        "have a nice day, bye",
+        "that solves it, goodbye",
+        "I have to go now, bye",
+        "see you next time",
+        "signing off now",
+        "okay I'm leaving, cheers bye"
+      ],
+      "responses": [
+        "Thank you for contacting customer support! Have a wonderful day ahead.",
+        "Goodbye! Please reach out again if you need any further assistance.",
+        "Have a great day! Don't hesitate to reach back out if you have any more questions."
+      ]
+    },
+    {
+      "intent": "thanks",
+      "patterns": [
+        "thanks",
+        "thank you",
+        "thank you so much",
+        "appreciate your help",
+        "thanks a lot",
+        "awesome thanks",
+        "great thank you",
+        "many thanks",
+        "thanks for the quick response",
+        "i appreciate it",
+        "that was really helpful",
+        "thanks buddy",
+        "thank you very much for assisting me",
+        "you resolved my problem thanks",
+        "grateful for the assistance",
+        "cheers thanks",
+        "thanks for your time",
+        "cool thanks"
+      ],
+      "responses": [
+        "You're very welcome! Is there anything else I can help you with today?",
+        "Happy to help! Let me know if you need assistance with anything else.",
+        "Glad I could help! Feel free to ask if you have any other questions."
+      ]
+    },
+    {
+      "intent": "order_status",
+      "patterns": [
+        "where is my order",
+        "check my order status",
+        "what is the status of my order",
+        "can you check order status",
+        "track my purchase",
+        "i want to check where my package is",
+        "has my order shipped yet",
+        "is my order on the way",
+        "order status inquiry",
+        "where has my shipment reached",
+        "find my order",
+        "check order progress",
+        "look up order status",
+        "status of order",
+        "i placed an order recently where is it",
+        "can you look up my order",
+        "please check the status of my order",
+        "what happened to my package",
+        "tell me about my recent order",
+        "has my package been dispatched",
+        "where is my package",
+        "where is my parcel",
+        "show order status"
+      ],
+      "responses": [
+        "I can certainly check your order status! Please provide your Order ID (for example, ORD1025).",
+        "Sure, let me check that for you. What is your Order ID?",
+        "I'd be glad to look up your order. Could you please share your Order ID (e.g. ORD1025)?"
+      ]
+    },
+    {
+      "intent": "order_tracking",
+      "patterns": [
+        "track package",
+        "tracking number",
+        "how do i track my parcel",
+        "i need tracking information",
+        "where is the courier right now",
+        "tracking link for my order",
+        "give me tracking details",
+        "how can i track my delivery",
+        "courier tracking status",
+        "track my item",
+        "provide package tracking",
+        "i want to trace my shipment",
+        "tracking details please",
+        "can i track where the delivery van is",
+        "live tracking for my order",
+        "track my shipment ORD1025",
+        "where can i find tracking info",
+        "check tracking updates",
+        "status of courier tracking",
+        "where is my package right now",
+        "where is my parcel",
+        "has my package shipped yet",
+        "track my package",
+        "when will my package arrive",
+        "is my parcel on the way",
+        "show me where my delivery is",
+        "what is the tracking update for my package",
+        "my package has not moved for days",
+        "where is my shipment now",
+        "can you track my parcel",
+        "is my delivery out for delivery today"
+      ],
+      "responses": [
+        "To provide tracking updates, please provide your Order ID (such as ORD1025).",
+        "I can retrieve live tracking details for your shipment. What is your Order ID?",
+        "Please provide your Order ID so I can fetch the latest courier tracking information for your package."
+      ]
+    },
+    {
+      "intent": "cancellation",
+      "patterns": [
+        "cancel my order",
+        "i want to cancel an order",
+        "how do i cancel my purchase",
+        "stop my shipment",
+        "can i cancel order ORD1025",
+        "cancel order please",
+        "i ordered by mistake need to cancel",
+        "please abort my order",
+        "request order cancellation",
+        "i want to revoke my order",
+        "cancel my purchase right now",
+        "how can i cancel my pending order",
+        "revoke recent purchase",
+        "call off my order",
+        "i changed my mind cancel my order",
+        "is it possible to cancel an order that was placed today",
+        "order cancellation request",
+        "cancel item from order"
+      ],
+      "responses": [
+        "Orders can be cancelled before they enter the shipping phase. Please provide your Order ID to verify cancellation eligibility.",
+        "I can help cancel your order if it hasn't dispatched yet. What is your Order ID?",
+        "To proceed with order cancellation, please provide your Order ID."
+      ]
+    },
+    {
+      "intent": "return_request",
+      "patterns": [
+        "i want to return a product",
+        "how do i return an item",
+        "return policy",
+        "what is the return process",
+        "can i return my order",
+        "i want to initiate a return",
+        "return item for refund",
+        "how many days do i have to return",
+        "create return label",
+        "i want to send back this item",
+        "return eligibility for my order",
+        "return request for order",
+        "how do returns work here",
+        "can i send an item back",
+        "need to return product purchased last week",
+        "return instructions please",
+        "i am not satisfied want to return",
+        "where do i drop off my return package"
+      ],
+      "responses": [
+        "We offer a 30-day return policy for items in original condition. Please provide your Order ID to verify return eligibility and generate return instructions.",
+        "You can return eligible products within 30 days of delivery. What is your Order ID so I can check your return status?",
+        "I can assist you with your return request. Please share your Order ID to check if your item is eligible."
+      ]
+    },
+    {
+      "intent": "refund_request",
+      "patterns": [
+        "i want a refund",
+        "how do i get my money back",
+        "where is my refund",
+        "when will i receive my refund",
+        "request refund for order",
+        "refund status check",
+        "my refund has not arrived",
+        "can you refund my purchase",
+        "claim a refund",
+        "money back guarantee",
+        "how long does refund processing take",
+        "i returned the product when will i get my refund",
+        "refund policy details",
+        "i was overcharged need refund",
+        "please process my refund",
+        "issue refund to my credit card",
+        "has my refund been processed yet",
+        "refund not credited to bank account",
+        "I want my money back",
+        "I want my money back for the broken item",
+        "give me my money back please",
+        "I'd like my money returned",
+        "refund me please",
+        "please refund my purchase",
+        "I want a refund for this item",
+        "can I get my money back",
+        "send my refund",
+        "when will I get my refund",
+        "I am requesting a refund"
+      ],
+      "responses": [
+        "Refunds are typically processed within 3-5 business days after inspection. Please provide your Order ID to look up your refund status.",
+        "I can help check your refund status. Could you provide your Order ID?",
+        "To check the status of your refund or initiate a refund review, please share your Order ID."
+      ]
+    },
+    {
+      "intent": "payment_issue",
+      "patterns": [
+        "my payment failed",
+        "payment declined at checkout",
+        "why did my credit card get rejected",
+        "money was deducted but order not placed",
+        "payment issue during checkout",
+        "charged twice for the same order",
+        "transaction error while paying",
+        "payment gateway error",
+        "debit card not working on your site",
+        "double charge on my statement",
+        "billing error on my account",
+        "payment processing failed",
+        "upi payment failed but amount debited",
+        "paypal payment error",
+        "payment could not be completed",
+        "checkout keeps declining my card",
+        "charged multiple times"
+      ],
+      "responses": [
+        "If your payment was deducted but no order confirmation was received, banks usually release authorization holds within 24-48 hours. If you were double charged, please provide your payment reference or order ID so our support team can investigate.",
+        "We apologize for the payment trouble. Double charges or declined payments are usually resolved automatically within 24-48 hours. If you need immediate assistance, I can escalate this to human support with your transaction details.",
+        "Payment issues can occur due to bank gateway timeouts or security checks. Please provide your Order ID or transaction reference if available."
+      ]
+    },
+    {
+      "intent": "delivery_delay",
+      "patterns": [
+        "my delivery is delayed",
+        "order has not arrived on time",
+        "package is late and delayed",
+        "why is my shipment delayed",
+        "estimated delivery date was yesterday and shipment is delayed",
+        "delivery delay inquiry",
+        "package delay in transit",
+        "courier delivery delay",
+        "shipment running late and delayed",
+        "when will my delayed parcel arrive",
+        "my order delivery is delayed",
+        "delayed shipping notice",
+        "why is my delivery postponed",
+        "delivery is delayed what should i do",
+        "late delivery report",
+        "experiencing delivery delay",
+        "delay in receiving my order",
+        "shipment delayed by carrier",
+        "package overdue and delayed",
+        "why is courier shipment delayed"
+      ],
+      "responses": [
+        "We apologize for the delay. Courier delays can occasionally happen due to weather or transit disruptions. Please provide your Order ID so I can check the latest delivery status and expedite if needed.",
+        "I'm sorry your package is running late! Please share your Order ID so I can inspect the tracking details with the courier.",
+        "Let me look into why your delivery is delayed. What is your Order ID?"
+      ]
+    },
+    {
+      "intent": "damaged_product",
+      "patterns": [
+        "my product arrived damaged",
+        "the item is broken",
+        "package was smashed during delivery",
+        "damaged product received",
+        "the box was torn and contents damaged",
+        "item is defective out of the box",
+        "received broken goods",
+        "product has scratches and dents",
+        "goods arrived in bad condition",
+        "defective item received",
+        "the screen is cracked on delivery",
+        "item not working upon arrival",
+        "damaged in transit",
+        "report damaged parcel",
+        "received damaged merchandise need replacement"
+      ],
+      "responses": [
+        "We are very sorry to hear that your item arrived damaged! We offer free replacements or full refunds for damaged items. Please share your Order ID, and I will escalate this to create an expedited replacement ticket.",
+        "I'm so sorry your product arrived damaged. Please provide your Order ID so we can verify the purchase and initiate a free replacement or return.",
+        "Damaged items are covered by our buyer protection guarantee. Please provide your Order ID so we can assist with an immediate replacement or full refund."
+      ]
+    },
+    {
+      "intent": "product_information",
+      "patterns": [
+        "do you have product specifications",
+        "is this item in stock",
+        "product details inquiry",
+        "tell me about this product",
+        "what colors does this come in",
+        "product sizing guide",
+        "is this product compatible with mac",
+        "what materials is this made of",
+        "check product availability",
+        "do you sell electronic accessories",
+        "product technical specifications",
+        "can you give me more details on an item",
+        "where can i find product dimensions",
+        "is there a user manual available",
+        "when will out of stock items be restocked",
+        "does this come with accessories included"
+      ],
+      "responses": [
+        "Detailed product specifications, dimensions, materials, and stock availability can be found on each product's catalog page. Which product are you interested in?",
+        "Our catalog lists comprehensive specifications, size guides, and warranty info for all products. Feel free to mention the product name or SKU for more details.",
+        "I can help with product information! You can check product pages for current stock and specs, or tell me which product you are inquiring about."
+      ]
+    },
+    {
+      "intent": "account_access",
+      "patterns": [
+        "i cannot log in to my account",
+        "login problem",
+        "my account is locked",
+        "trouble signing in",
+        "cannot sign in to my profile",
+        "access denied to account",
+        "account blocked after multiple attempts",
+        "login page not accepting my credentials",
+        "unable to access my user profile",
+        "cannot log in",
+        "account login error",
+        "why am i locked out of my account",
+        "help accessing my account",
+        "sign in issues",
+        "system says account suspended"
+      ],
+      "responses": [
+        "If you are having trouble logging in, please verify your email address. You can use the 'Forgot Password' link to regain access, or let me know if your account was locked due to failed attempts.",
+        "Account access issues can usually be resolved by resetting your password or clearing browser cookies. If your account is locked, an agent can verify your identity and unlock it.",
+        "I can help with account access. Would you like instructions to reset your password, or do you need a human agent to review your account lock?"
+      ]
+    },
+    {
+      "intent": "password_reset",
+      "patterns": [
+        "how do i reset my password",
+        "forgot my password",
+        "change my password",
+        "reset account password",
+        "i need a password reset link",
+        "did not receive password reset email",
+        "update login password",
+        "how to change forgotten password",
+        "password reset instructions",
+        "send me password recovery link",
+        "where do i reset login password",
+        "how can i recover my password",
+        "forgot password assistance",
+        "lost my password",
+        "password recovery"
+      ],
+      "responses": [
+        "To reset your password: 1. Click 'Sign In' at the top right. 2. Select 'Forgot Password?'. 3. Enter your registered email address. 4. Follow the secure reset link sent to your inbox.",
+        "You can easily reset your password by navigating to the login page and clicking 'Forgot Password'. A reset link will be sent to your registered email.",
+        "Password reset links are valid for 60 minutes. Enter your registered email on the login screen to receive reset instructions."
+      ]
+    },
+    {
+      "intent": "account_update",
+      "patterns": [
+        "how do i update my email address",
+        "change my shipping address on profile",
+        "update my profile details",
+        "how to edit my account info",
+        "change phone number in account",
+        "update billing address",
+        "modify account settings",
+        "change my name on profile",
+        "edit account credentials",
+        "how do i change my registered mobile number",
+        "update personal information",
+        "manage account preferences",
+        "change default delivery address",
+        "update my email address",
+        "change the phone number on my profile",
+        "how do I change my shipping address on my account",
+        "I moved, please update my address",
+        "change my name on the account",
+        "update my billing details",
+        "how do I edit my profile information",
+        "I need to change the email linked to my account",
+        "please update my contact details",
+        "modify my account preferences",
+        "change my delivery address in my profile",
+        "I got married and need to change my surname on the account"
+      ],
+      "responses": [
+        "You can update your personal details, email, phone number, and default delivery addresses by visiting Account Settings > Profile Information.",
+        "To modify account information, sign in and go to 'My Profile' where you can edit your addresses and contact details.",
+        "Address and profile updates can be managed directly in your Account Dashboard under 'Profile & Security'."
+      ]
+    },
+    {
+      "intent": "shipping_information",
+      "patterns": [
+        "what are your shipping options",
+        "how long does shipping take",
+        "shipping rates and delivery times",
+        "do you ship internationally",
+        "what courier companies do you use",
+        "shipping policy details",
+        "free shipping criteria",
+        "express delivery options",
+        "do you offer overnight delivery",
+        "how much does delivery cost",
+        "shipping fees and charges",
+        "standard shipping duration",
+        "how long does standard delivery take",
+        "how long does delivery take",
+        "standard delivery timeframe",
+        "what are the shipping destinations",
+        "do you deliver to po boxes",
+        "customs and import duties shipping"
+      ],
+      "responses": [
+        "We offer Standard Shipping (3-5 business days, free on orders over $50) and Express Shipping (1-2 business days for $9.99). International shipping is available to select regions.",
+        "Standard delivery takes 3-5 business days, while Express takes 1-2 business days. Orders over $50 qualify for free standard shipping.",
+        "Shipping options include Standard (3-5 business days) and Expedited (1-2 business days). Tracking is provided via email once your package ships."
+      ]
+    },
+    {
+      "intent": "warranty_information",
+      "patterns": [
+        "what is the warranty on products",
+        "how long is the warranty period",
+        "warranty coverage details",
+        "how do i claim warranty",
+        "is there a manufacturer warranty",
+        "does warranty cover accidental damage",
+        "warranty claim process",
+        "how to register for warranty",
+        "what does the warranty include",
+        "warranty policy for electronics",
+        "file a warranty claim",
+        "is warranty transferable",
+        "extend product warranty",
+        "warranty repair inquiry"
+      ],
+      "responses": [
+        "All hardware items come with a standard 1-year manufacturer warranty covering manufacturing defects. Proof of purchase (Order ID) is required to file a claim.",
+        "Our standard warranty covers hardware defects and workmanship for 12 months from purchase date. Accidental damage is not covered unless extended protection was purchased.",
+        "To claim warranty support, have your Order ID and serial number ready. You can submit a warranty claim directly or escalate to human support."
+      ]
+    },
+    {
+      "intent": "complaint",
+      "patterns": [
+        "i want to file a complaint",
+        "very bad customer service",
+        "i am extremely unhappy with my experience",
+        "i want to speak to a manager",
+        "terrible service i demand action",
+        "register formal complaint",
+        "i have a serious issue that needs escalation",
+        "unacceptable customer support",
+        "the service was awful",
+        "i am filing a consumer complaint",
+        "worst experience ever",
+        "i am very frustrated with your service",
+        "escalate my complaint to management",
+        "disappointed with your product and support",
+        "i want to report a problem with your staff",
+        "this is unacceptable service",
+        "I am very disappointed with my order",
+        "your staff was rude to me",
+        "I want to make a formal complaint",
+        "this is the worst experience I have had",
+        "I'm extremely unhappy with how this was handled",
+        "nobody responded to my earlier emails, this is ridiculous",
+        "I've been ignored for days, I'm furious",
+        "your company has let me down badly",
+        "I'm filing a complaint about the delivery driver",
+        "terrible service, I expect compensation",
+        "I'm not happy and I want someone to answer for this",
+        "this is a joke, fix it now",
+        "your team made a mess of my order",
+        "I am appalled by how I was treated"
+      ],
+      "responses": [
+        "We sincerely apologize for your frustrating experience. Customer satisfaction is our highest priority. I am escalating your concern to our human support management team right now so a supervisor can address this.",
+        "We are truly sorry that we did not meet your expectations. I want to make this right. I can open a high-priority support ticket immediately for supervisor review.",
+        "We take complaints very seriously. Let me connect you with our senior customer support team immediately to resolve your issue."
+      ]
+    },
+    {
+      "intent": "human_support",
+      "patterns": [
+        "talk to a human",
+        "connect me to a representative",
+        "i want to speak to an agent",
+        "human support please",
+        "transfer me to a real person",
+        "can i speak with a live agent",
+        "get me a customer service rep",
+        "talk to an agent",
+        "connect to operator",
+        "speak with human supervisor",
+        "need real human help",
+        "chat with a person",
+        "request human assistance",
+        "stop bot talk to human",
+        "agent please",
+        "human agent",
+        "connect me to staff",
+        "live representative"
+      ],
+      "responses": [
+        "I will gladly connect you with a human support agent. Creating your support ticket now so our team can assist you directly.",
+        "Connecting you with human support. Let me generate a support ticket with your conversation details.",
+        "Certainly! I am escalating your conversation to our human support queue right away."
+      ]
+    },
+    {
+      "intent": "unknown_query",
+      "patterns": [
+        "what is the meaning of quantum entanglement",
+        "tell me a recipe for chocolate cake",
+        "what is the capital of australia",
+        "who won the world cup in 1998",
+        "can you write python code for binary search",
+        "what is the weather like in tokyo today",
+        "how to fix a leaky kitchen faucet",
+        "solve this math equation x squared minus four",
+        "tell me a funny bedtime joke",
+        "what is the airspeed velocity of an unladen swallow",
+        "asdfghjkl random keyboard typing",
+        "blablabla nonsense input 12345",
+        "xyz random gibberish phrase",
+        "who is the prime minister of canada",
+        "can you play chess with me",
+        "what is the weather in paris today",
+        "tell me a joke",
+        "who won the football match last night",
+        "how do I cook pasta carbonara",
+        "write me a poem about cats",
+        "translate hello into french",
+        "recommend a good movie",
+        "how many planets are in the solar system",
+        "solve this integral for me",
+        "what's your favourite colour",
+        "explain quantum physics simply"
+      ],
+      "responses": [
+        "I'm not completely sure I understood your question. Could you explain the issue in a little more detail? You can also request human support.",
+        "I'm specialized in customer support for orders, shipping, returns, refunds, and accounts. Could you clarify your question, or would you like to connect with human support?",
+        "I didn't quite catch that. Please let me know how I can help with your purchases, account, or support tickets, or click 'Contact Human Support'."
+      ]
+    },
+    {
+      "intent": "make_payment",
+      "patterns": [
+        "I want to pay for my order",
+        "how do I pay for my order",
+        "send me a payment link",
+        "I need to complete my payment",
+        "can I pay now",
+        "pay for ORD1025",
+        "checkout link please",
+        "I still need to pay for my order",
+        "how can I pay",
+        "make a payment for my order",
+        "I'd like to check out my order",
+        "complete payment for order",
+        "payment link for my order",
+        "my order is not paid yet, how do I pay",
+        "pay my outstanding order",
+        "can I pay by card",
+        "I want to pay with my credit card",
+        "send payment link",
+        "where do I pay for my order",
+        "pay now",
+        "I haven't paid yet, what do I do",
+        "can you give me a checkout link",
+        "I want to finish paying for my purchase",
+        "how do I complete checkout"
+      ],
+      "responses": [
+        "I can send you a secure payment link. Please share your Order ID and the email address used on the order."
+      ]
+    }
+  ]
+}

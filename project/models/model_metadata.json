@@ -1,0 +1,44 @@
+{
+  "model_version": "1.0.0",
+  "model_architecture": "FeatureUnion(TF-IDF word 1-2gram + TF-IDF char_wb 3-5gram) + LogisticRegression(C=10, balanced)",
+  "training_timestamp": "2026-11-06T23:57:41.021030+00:00",
+  "total_samples": 445,
+  "total_classes": 21,
+  "classes": [
+    "account_access",
+    "account_update",
+    "cancellation",
+    "complaint",
+    "damaged_product",
+    "delivery_delay",
+    "goodbye",
+    "greeting",
+    "human_support",
+    "make_payment",
+    "order_status",
+    "order_tracking",
+    "password_reset",
+    "payment_issue",
+    "product_information",
+    "refund_request",
+    "return_request",
+    "shipping_information",
+    "thanks",
+    "unknown_query",
+    "warranty_information"
+  ],
+  "test_split_ratio": 0.25,
+  "evaluation_metrics": {
+    "accuracy": 0.8393,
+    "macro_precision": 0.8713,
+    "macro_recall": 0.8477,
+    "macro_f1": 0.8533,
+    "weighted_f1": 0.8408
+  },
+  "cross_validation": {
+    "folds": 5,
+    "accuracy_mean": 0.836,
+    "accuracy_std": 0.0252
+  },
+  "recommended_confidence_threshold": 0.4
+}

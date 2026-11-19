@@ -1,0 +1,131 @@
+{% set title = "Administration" %}
+{% include "_head.html" %}
+<body class="dashboard-container">
+
+  <header class="dashboard-navbar">
+    <div class="nav-brand">
+      <div class="brand-logo-icon brand-small" aria-hidden="true">⚙️</div>
+      <h1 class="nav-title">Administration console</h1>
+    </div>
+    <div class="user-profile">
+      <a href="/agent/dashboard" class="btn btn-outline btn-sm">🛡️ Agent dashboard</a>
+      <div class="profile-info">
+        <div class="profile-name">{{ agent.full_name }}</div>
+        <div class="profile-role">@{{ agent.username }} • Administrator</div>
+      </div>
+      <button id="agentLogoutBtn" class="btn btn-secondary btn-sm" type="button">Sign out</button>
+    </div>
+  </header>
+
+  <main class="dashboard-content">
+    <nav class="tabs" role="tablist" aria-label="Admin sections">
+      <button class="tab active" role="tab" aria-selected="true" data-tab="overview" type="button">Overview</button>
+      <button class="tab" role="tab" aria-selected="false" data-tab="users" type="button">Users</button>
+      <button class="tab" role="tab" aria-selected="false" data-tab="payments" type="button">Payments</button>
+      <button class="tab" role="tab" aria-selected="false" data-tab="audit" type="button">Audit log</button>
+    </nav>
+
+    <section id="tab-overview" data-section>
+      <section class="metrics-grid">
+        <div class="metric-card"><div><div class="metric-title">Collected</div><div id="mCollected" class="metric-value">—</div></div><div class="metric-icon green">💰</div></div>
+        <div class="metric-card"><div><div class="metric-title">Refunded</div><div id="mRefunded" class="metric-value">—</div></div><div class="metric-icon amber">↩️</div></div>
+        <div class="metric-card"><div><div class="metric-title">Open tickets</div><div id="mOpen" class="metric-value">—</div></div><div class="metric-icon blue">📋</div></div>
+        <div class="metric-card"><div><div class="metric-title">Failed refunds</div><div id="mFailedRefunds" class="metric-value">—</div></div><div class="metric-icon rose">⚠️</div></div>
+      </section>
+      <div class="two-col">
+        <section class="table-card card-pad">
+          <h3 class="section-title">Payments</h3>
+          <dl class="kv-grid" id="paymentInfo"></dl>
+        </section>
+        <section class="table-card card-pad">
+          <h3 class="section-title">System</h3>
+          <dl class="kv-grid" id="systemInfo"></dl>
+        </section>
+      </div>
+    </section>
+
+    <section id="tab-users" data-section hidden>
+      <div class="two-col">
+        <section class="table-card card-pad">
+          <h3 class="section-title">Create user</h3>
+          <form id="createUserForm" novalidate>
+            <div class="form-group"><label for="cuUsername">Username</label>
+              <input id="cuUsername" class="form-control" maxlength="32" autocomplete="off" required></div>
+            <div class="form-group"><label for="cuFullName">Full name</label>
+              <input id="cuFullName" class="form-control" maxlength="100" required></div>
+            <div class="form-group"><label for="cuEmail">Email (optional)</label>
+              <input id="cuEmail" type="email" class="form-control" maxlength="254"></div>
+            <div class="form-group"><label for="cuAccess">Access</label>
+              <select id="cuAccess" class="form-control"><option value="agent">Support agent</option><option value="admin">Administrator</option></select></div>
+            <div class="form-group"><label for="cuPassword">Temporary password</label>
+              <input id="cuPassword" type="text" class="form-control" minlength="10" maxlength="256" autocomplete="off" required>
+              <small class="muted">At least 10 characters with a letter and a digit. The user must change it at sign-in.</small></div>
+            <div id="cuError" class="alert alert-error" role="alert" hidden></div>
+            <button type="submit" class="btn btn-primary">Create user</button>
+          </form>
+        </section>
+        <section class="table-card card-pad">
+          <h3 class="section-title">Accounts</h3>
+          <div id="secretBox" class="alert alert-success" hidden></div>
+          <div class="table-responsive">
+            <table class="data-table">
+              <thead><tr><th>User</th><th>Access</th><th>State</th><th>Last sign-in</th><th></th></tr></thead>
+              <tbody id="usersBody"></tbody>
+            </table>
+          </div>
+        </section>
+      </div>
+    </section>
+
+    <section id="tab-payments" data-section hidden>
+      <section class="toolbar-card">
+        <div class="filter-group">
+          <select id="paymentStatusFilter" class="form-control select-narrow" aria-label="Filter payments">
+            <option value="All">All statuses</option>
+            <option value="pending">Pending</option><option value="succeeded">Succeeded</option>
+            <option value="failed">Failed</option><option value="expired">Expired</option>
+          </select>
+          <button id="paymentFilterBtn" class="btn btn-primary btn-sm" type="button">Filter</button>
+        </div>
+      </section>
+      <section class="table-card">
+        <div class="table-responsive">
+          <table class="data-table">
+            <thead><tr><th>#</th><th>Order</th><th>Amount</th><th>Status</th><th>Provider</th><th>Created</th><th>Paid</th></tr></thead>
+            <tbody id="paymentsBody"></tbody>
+          </table>
+        </div>
+        <div class="pagination-container">
+          <div id="paymentsInfo" class="muted small"></div>
+          <div class="btn-row">
+            <button id="paymentPrev" class="btn btn-secondary btn-sm" type="button" disabled>&larr; Previous</button>
+            <button id="paymentNext" class="btn btn-secondary btn-sm" type="button" disabled>Next &rarr;</button>
+          </div>
+        </div>
+      </section>
+    </section>
+
+    <section id="tab-audit" data-section hidden>
+      <section class="table-card">
+        <div class="table-responsive">
+          <table class="data-table">
+            <thead><tr><th>When</th><th>Actor</th><th>Action</th><th>Target</th><th>Details</th><th>IP</th></tr></thead>
+            <tbody id="auditBody"></tbody>
+          </table>
+        </div>
+        <div class="pagination-container">
+          <div id="auditInfo" class="muted small"></div>
+          <div class="btn-row">
+            <button id="auditPrev" class="btn btn-secondary btn-sm" type="button" disabled>&larr; Previous</button>
+            <button id="auditNext" class="btn btn-secondary btn-sm" type="button" disabled>Next &rarr;</button>
+          </div>
+        </div>
+      </section>
+    </section>
+  </main>
+
+  <div id="toastContainer" class="toast-container" aria-live="assertive"></div>
+  <script src="/static/js/common.js"></script>
+  <script src="/static/js/admin.js"></script>
+</body>
+</html>

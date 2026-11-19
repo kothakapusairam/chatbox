@@ -1,0 +1,26 @@
+{% set title = "Payment status" %}
+{% include "_head.html" %}
+<body>
+<div class="login-shell">
+  <div class="login-card">
+    <div class="login-header">
+      <div class="brand-logo-icon" aria-hidden="true">{% if status == 'success' %}✅{% else %}ℹ️{% endif %}</div>
+      {% if status == 'success' %}
+        <h1 class="page-title">Thank you for your payment</h1>
+        <p class="muted">We are confirming the payment with our payment provider. This usually takes a few seconds;
+          your order will show as paid in the chat once it is confirmed.{% if order_id %} Order <strong>{{ order_id }}</strong>.{% endif %}</p>
+      {% elif status == 'cancelled' %}
+        <h1 class="page-title">Payment cancelled</h1>
+        <p class="muted">No charge was made. You can request a new payment link from the chat at any time.</p>
+      {% else %}
+        <h1 class="page-title">Payment status</h1>
+        <p class="muted">Return to the chat to check the status of your order.</p>
+      {% endif %}
+    </div>
+    <div class="login-body center">
+      <a class="btn btn-primary" href="/">Return to chat</a>
+    </div>
+  </div>
+</div>
+</body>
+</html>

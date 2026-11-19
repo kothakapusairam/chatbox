@@ -1,0 +1,407 @@
+{
+  "knowledge_base": [
+    {
+      "intent": "greeting",
+      "topic": "Welcome & Assistance Overview",
+      "approved_answer": "Hello and welcome to Customer Support! I am your AI assistant trained to help with orders, delivery tracking, cancellations, refunds, returns, warranty, and account access. How can I assist you today?",
+      "relevant_instructions": [
+        "Select a quick action button below or type your question naturally.",
+        "You can provide an Order ID at any time (e.g. ORD1025).",
+        "Type 'human agent' or click 'Contact Human Support' if you need human intervention."
+      ],
+      "required_information": [],
+      "follow_up_questions": [
+        "Are you inquiring about an existing order or an account issue?",
+        "Do you have an Order ID you would like me to look up?"
+      ],
+      "escalation_conditions": [
+        "Customer explicitly requests human agent.",
+        "Customer indicates unresolved previous ticket."
+      ]
+    },
+    {
+      "intent": "goodbye",
+      "topic": "Chat Closure & Feedback",
+      "approved_answer": "Thank you for contacting customer support. We hope your issue was resolved. Have a great day!",
+      "relevant_instructions": [
+        "Close this tab or click 'New Chat' if you wish to start a new session.",
+        "Keep your ticket ID safe if a support ticket was generated during this session."
+      ],
+      "required_information": [],
+      "follow_up_questions": [],
+      "escalation_conditions": []
+    },
+    {
+      "intent": "thanks",
+      "topic": "Acknowledgment",
+      "approved_answer": "You are very welcome! It was my pleasure assisting you. Please let me know if there is anything else I can do for you.",
+      "relevant_instructions": [],
+      "required_information": [],
+      "follow_up_questions": [
+        "Is there any other issue or order you need help with?"
+      ],
+      "escalation_conditions": []
+    },
+    {
+      "intent": "order_status",
+      "topic": "Order Status Lookup",
+      "approved_answer": "To look up the current status of your order, please provide your Order ID (such as ORD1025). I will query our order fulfillment database and provide live dispatch and transit milestones.",
+      "relevant_instructions": [
+        "Provide your Order ID (format: ORD followed by numbers, e.g., ORD1025).",
+        "Status will reflect Processing, In Transit, Delivered, or Cancelled.",
+        "Estimated delivery date and tracking carrier will be displayed."
+      ],
+      "required_information": [
+        "order_id"
+      ],
+      "follow_up_questions": [
+        "Please enter your Order ID (e.g., ORD1025):"
+      ],
+      "escalation_conditions": [
+        "Order marked delivered but customer reports not received.",
+        "Order status not found after multiple attempts.",
+        "Significant fulfillment delay exceeding 7 business days."
+      ]
+    },
+    {
+      "intent": "order_tracking",
+      "topic": "Package Tracking & Carrier Details",
+      "approved_answer": "Tracking updates provide real-time checkpoint data from our logistics partners. Please share your Order ID so I can fetch your tracking number and current transit location.",
+      "relevant_instructions": [
+        "Share your Order ID (e.g., ORD1025).",
+        "View carrier name, tracking milestone, and latest transit hub update."
+      ],
+      "required_information": [
+        "order_id"
+      ],
+      "follow_up_questions": [
+        "What is your Order ID so I can pull up the courier tracking link?"
+      ],
+      "escalation_conditions": [
+        "Carrier indicates parcel damaged or lost in transit.",
+        "Tracking status has not updated for over 5 business days."
+      ]
+    },
+    {
+      "intent": "cancellation",
+      "topic": "Order Cancellation Policy",
+      "approved_answer": "Orders in 'Processing' status can be cancelled from this chat, provided they have not yet been dispatched to the carrier. If the order was paid, a full refund is issued automatically to your original payment method. Once an order is 'In Transit' it cannot be cancelled and must be returned after delivery.",
+      "relevant_instructions": [
+        "Provide your Order ID and the email address used at checkout to verify the order.",
+        "If the order is 'Processing', cancellation is processed immediately and any payment is refunded.",
+        "If the order is 'In Transit', wait for delivery and submit a return request."
+      ],
+      "required_information": [
+        "order_id",
+        "cancellation_reason"
+      ],
+      "follow_up_questions": [
+        "What is the Order ID of the purchase you wish to cancel?"
+      ],
+      "escalation_conditions": [
+        "System glitch prevented automated cancellation prior to dispatch.",
+        "Customer requests cancellation due to duplicate accidental billing."
+      ]
+    },
+    {
+      "intent": "return_request",
+      "topic": "Product Returns & Return Labels",
+      "approved_answer": "Items in original condition with intact packaging can be returned within 30 days of delivery for a refund or exchange. Return shipping is complimentary for defective or incorrect items.",
+      "relevant_instructions": [
+        "Provide your Order ID to verify return window eligibility.",
+        "Select the item and specify the reason for return.",
+        "A prepaid return shipping label and barcode will be issued upon authorization."
+      ],
+      "required_information": [
+        "order_id",
+        "return_reason"
+      ],
+      "follow_up_questions": [
+        "Please provide your Order ID so I can verify return eligibility."
+      ],
+      "escalation_conditions": [
+        "Item delivered over 30 days ago with special warranty or defect claims.",
+        "Return label generation failure.",
+        "Non-returnable item dispute."
+      ]
+    },
+    {
+      "intent": "refund_request",
+      "topic": "Refund Processing & Timelines",
+      "approved_answer": "Refunds are returned to your original payment method. Cancelled paid orders are refunded in full. Returned items are refunded after our team receives and inspects them. Banks usually post refunds within 5 to 10 business days after they are issued.",
+      "relevant_instructions": [
+        "Provide your Order ID and checkout email to view the payment and refund status.",
+        "A refund status of 'Pending' means it has been submitted to your bank.",
+        "If a refund has not appeared after 10 business days, ask for human support with your Order ID."
+      ],
+      "required_information": [
+        "order_id"
+      ],
+      "follow_up_questions": [
+        "Please share your Order ID to view refund status."
+      ],
+      "escalation_conditions": [
+        "Refund has been pending for more than 10 business days.",
+        "Customer dispute regarding deduction of restocking fees.",
+        "Original payment card is closed or expired."
+      ]
+    },
+    {
+      "intent": "payment_issue",
+      "topic": "Payment Failures & Billing Inquiries",
+      "approved_answer": "If your card or UPI payment failed or if you noticed duplicate charges, rest assured that uncaptured funds are automatically released by your bank within 24 to 48 hours. We do not store credit card numbers.",
+      "relevant_instructions": [
+        "Verify your billing address and CVV code.",
+        "Check with your card-issuing bank for international transaction permissions.",
+        "If duplicate charges appear on your bank statement, provide the transaction timestamp and Order ID."
+      ],
+      "required_information": [
+        "order_id",
+        "payment_method",
+        "transaction_reference"
+      ],
+      "follow_up_questions": [
+        "Did this happen during checkout, or were you billed twice for an order?"
+      ],
+      "escalation_conditions": [
+        "Confirmed double charge on verified bank statement.",
+        "Payment debited but order failed to generate in system.",
+        "Customer suspects fraudulent account activity."
+      ]
+    },
+    {
+      "intent": "delivery_delay",
+      "topic": "Shipment Delays & Expedited Follow-up",
+      "approved_answer": "We apologize for the unexpected delay. Delays can occur due to regional weather disruptions, logistical bottlenecks, or peak holiday volumes. Let us investigate with our logistics partner.",
+      "relevant_instructions": [
+        "Provide your Order ID.",
+        "Our system will check carrier alerts and calculate revised delivery timing.",
+        "If overdue by more than 48 hours past estimate, a human agent can file a carrier escalation priority request."
+      ],
+      "required_information": [
+        "order_id"
+      ],
+      "follow_up_questions": [
+        "What is your Order ID so I can verify where the delay occurred?"
+      ],
+      "escalation_conditions": [
+        "Delay exceeds estimated delivery date by more than 3 business days.",
+        "Express or priority shipping fee was paid by customer.",
+        "Carrier marks package status as undeliverable or address issue."
+      ]
+    },
+    {
+      "intent": "damaged_product",
+      "topic": "Damaged or Defective Item Escalation",
+      "approved_answer": "We are very sorry your package arrived damaged. All shipments are covered by our customer guarantee. We will arrange a free immediate replacement or full refund without requiring tedious paperwork.",
+      "relevant_instructions": [
+        "Provide your Order ID and describe the damage.",
+        "Take clear photos of the damaged shipping box and product.",
+        "Our support team will dispatch a replacement unit or issue a prepaid return label."
+      ],
+      "required_information": [
+        "order_id",
+        "damage_description"
+      ],
+      "follow_up_questions": [
+        "Please provide your Order ID and a brief description of the damage."
+      ],
+      "escalation_conditions": [
+        "All damaged product reports are escalated to human support for ticket creation.",
+        "High-value items exceeding $100 require agent approval for expedited replacement."
+      ]
+    },
+    {
+      "intent": "product_information",
+      "topic": "Product Specifications & Availability",
+      "approved_answer": "Our demo catalog includes electronics, home goods, and accessories. Full specifications, compatibility, dimensions, and user manuals are available on product description pages.",
+      "relevant_instructions": [
+        "Search products on the store navigation bar.",
+        "Check compatibility charts on each product detail page.",
+        "Out-of-stock items can be backordered with email alerts upon replenishment."
+      ],
+      "required_information": [
+        "product_name"
+      ],
+      "follow_up_questions": [
+        "Which product or category would you like information on?"
+      ],
+      "escalation_conditions": [
+        "Bulk wholesale or B2B purchase inquiries.",
+        "Customized enterprise hardware requirements."
+      ]
+    },
+    {
+      "intent": "account_access",
+      "topic": "Account Sign-in & Security Assistance",
+      "approved_answer": "If you are having trouble signing in, your account may be temporarily locked due to multiple consecutive incorrect password attempts, or your session may have expired.",
+      "relevant_instructions": [
+        "Use the 'Forgot Password' link on the login screen.",
+        "Check your spam folder for the one-time verification passcode.",
+        "Ensure your browser cookies are enabled and caps-lock is disabled."
+      ],
+      "required_information": [
+        "account_email"
+      ],
+      "follow_up_questions": [
+        "Are you receiving an 'invalid password' error or is your account locked?"
+      ],
+      "escalation_conditions": [
+        "Account locked with suspected unauthorized access.",
+        "Customer no longer has access to registered verification email."
+      ]
+    },
+    {
+      "intent": "password_reset",
+      "topic": "Self-Service Password Reset",
+      "approved_answer": "You can safely reset your password anytime: 1. Click 'Sign In' at top right. 2. Click 'Forgot Password?'. 3. Enter your account email. 4. Check your inbox for the secure reset link (valid for 60 minutes).",
+      "relevant_instructions": [
+        "Visit the Login page and click 'Forgot Password'.",
+        "Enter registered email address.",
+        "Choose a new password with at least 8 characters, including numbers and symbols."
+      ],
+      "required_information": [
+        "account_email"
+      ],
+      "follow_up_questions": [
+        "Have you already requested a password reset email today?"
+      ],
+      "escalation_conditions": [
+        "Password reset emails are consistently failing to deliver.",
+        "Account recovery requires manual identity verification."
+      ]
+    },
+    {
+      "intent": "account_update",
+      "topic": "Updating Profile & Addresses",
+      "approved_answer": "You can update your personal profile, phone number, billing information, and default shipping addresses by logging in and navigating to 'My Account' > 'Settings'.",
+      "relevant_instructions": [
+        "Sign in to your customer account.",
+        "Go to Settings > Profile or Addresses.",
+        "Click Edit, save your changes, and confirm via verification email if changing primary email."
+      ],
+      "required_information": [],
+      "follow_up_questions": [
+        "Are you trying to change the shipping address for an order that is already placed?"
+      ],
+      "escalation_conditions": [
+        "Customer needs to redirect an in-transit order to a new delivery address.",
+        "Email address update blocked due to duplicate registration."
+      ]
+    },
+    {
+      "intent": "shipping_information",
+      "topic": "Shipping Methods, Rates & Delivery Times",
+      "approved_answer": "We offer Standard Shipping (3-5 business days, free on orders over $50) and Express Expedited Shipping (1-2 business days for $9.99). All orders receive tracking notifications upon dispatch.",
+      "relevant_instructions": [
+        "Standard Shipping: 3-5 business days across domestic regions.",
+        "Express Delivery: 1-2 business days for orders placed before 2 PM EST.",
+        "International Shipping: 7-14 business days depending on customs clearance."
+      ],
+      "required_information": [],
+      "follow_up_questions": [
+        "Do you need information on domestic shipping, international rates, or express delivery?"
+      ],
+      "escalation_conditions": [
+        "Customs hold or unpaid duty disputes on international shipments."
+      ]
+    },
+    {
+      "intent": "warranty_information",
+      "topic": "Manufacturer Warranty & Coverage",
+      "approved_answer": "All demo electronics and hardware come with a 1-Year Limited Manufacturer Warranty covering defective materials and workmanship under normal consumer use. Proof of purchase is required.",
+      "relevant_instructions": [
+        "Check warranty period on your original invoice or order receipt.",
+        "Accidental physical damage and water ingress are excluded unless extended accidental protection was purchased.",
+        "To initiate a warranty repair or replacement, have your Order ID and product serial number ready."
+      ],
+      "required_information": [
+        "order_id",
+        "product_name"
+      ],
+      "follow_up_questions": [
+        "Do you have your Order ID or purchase date handy?"
+      ],
+      "escalation_conditions": [
+        "Warranty repair claims requiring manufacturer RMA authorization.",
+        "Disputes over warranty expiration dates."
+      ]
+    },
+    {
+      "intent": "complaint",
+      "topic": "Customer Complaints & Service Recovery",
+      "approved_answer": "We deeply apologize for your unsatisfactory experience. Your satisfaction is paramount to us, and we are committed to making things right. We can create an urgent priority ticket for immediate supervisor review.",
+      "relevant_instructions": [
+        "Provide a summary of the issue and any relevant Order ID.",
+        "An escalation ticket will be assigned directly to our Senior Customer Support Team.",
+        "Our team will review your conversation history and follow up within 2 hours."
+      ],
+      "required_information": [
+        "order_id",
+        "complaint_summary"
+      ],
+      "follow_up_questions": [
+        "Would you like me to open a priority ticket for a supervisor right now?"
+      ],
+      "escalation_conditions": [
+        "Always escalate to human support with High or Urgent priority."
+      ]
+    },
+    {
+      "intent": "human_support",
+      "topic": "Human Support Escalation Queue",
+      "approved_answer": "I will connect you directly with our Human Support Team. A support ticket is being generated with your conversation history so an agent can assist you seamlessly.",
+      "relevant_instructions": [
+        "A unique support ticket number will be provided immediately.",
+        "Our human support agents monitor the active queue during operating hours.",
+        "You can track your ticket status at any time using your Ticket ID."
+      ],
+      "required_information": [
+        "customer_name",
+        "issue_summary"
+      ],
+      "follow_up_questions": [
+        "Please provide your name or any specific details you would like noted on the ticket:"
+      ],
+      "escalation_conditions": [
+        "Always triggers ticket creation."
+      ]
+    },
+    {
+      "intent": "unknown_query",
+      "topic": "Clarification & Fallback Assistance",
+      "approved_answer": "I'm not completely sure I understood your question. Could you explain the issue in a little more detail? You can also request human support at any time.",
+      "relevant_instructions": [
+        "Try rephrasing your question using common terms (e.g., 'track my order', 'refund policy', 'cancel order').",
+        "Or click 'Contact Human Support' to have our human team assist you."
+      ],
+      "required_information": [],
+      "follow_up_questions": [
+        "Could you clarify your request or provide an Order ID?"
+      ],
+      "escalation_conditions": [
+        "Triggered when confidence score falls below the required threshold."
+      ]
+    },
+    {
+      "intent": "make_payment",
+      "topic": "Paying for an Order",
+      "approved_answer": "You can pay for an unpaid order with a secure payment link. Card details are entered on the payment provider's page, so we never see or store your card number.",
+      "relevant_instructions": [
+        "Provide your Order ID and the email address used on the order.",
+        "The payment link expires after a limited time; ask again if it has expired.",
+        "Your order is marked as paid once the payment provider confirms the payment."
+      ],
+      "required_information": [
+        "order_id",
+        "email"
+      ],
+      "follow_up_questions": [
+        "Which Order ID would you like to pay for?"
+      ],
+      "escalation_conditions": [
+        "Payment taken but order still shows as unpaid after 30 minutes."
+      ]
+    }
+  ]
+}

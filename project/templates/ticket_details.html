@@ -1,0 +1,100 @@
+{% set title = "Ticket " ~ ticket.ticket_id %}
+{% include "_head.html" %}
+<body class="dashboard-container">
+
+  <header class="dashboard-navbar">
+    <div class="nav-brand">
+      <div class="brand-logo-icon brand-small" aria-hidden="true">🛡️</div>
+      <h1 class="nav-title">Ticket <code>{{ ticket.ticket_id }}</code></h1>
+    </div>
+    <div class="user-profile">
+      <a href="/agent/dashboard" class="btn btn-secondary btn-sm">&larr; Back to dashboard</a>
+      <div class="profile-info"><div class="profile-name">{{ agent.full_name }}</div></div>
+    </div>
+  </header>
+
+  <main class="dashboard-content" id="ticketPage" data-ticket-id="{{ ticket.ticket_id }}">
+    <div class="details-grid">
+      <div class="stack-lg">
+        <section class="table-card card-pad">
+          <div class="space-between">
+            <div>
+              <h2 class="section-title">{{ ticket.ticket_id }}</h2>
+              <div class="muted small">Category: <strong>{{ ticket.predicted_category.replace('_', ' ').title() }}</strong> • Created {{ ticket.created_at }}</div>
+              {% if ticket.order_id %}<div class="muted small">Linked order: <a href="/agent/dashboard?order={{ ticket.order_id }}">{{ ticket.order_id }}</a></div>{% endif %}
+            </div>
+            <div class="btn-row">
+              <span id="headerPriorityBadge" class="badge priority-{{ ticket.priority.lower() }}">{{ ticket.priority }}</span>
+              <span id="headerStatusBadge" class="badge badge-{{ ticket.status.lower().replace(' ', '-') }}">{{ ticket.status }}</span>
+            </div>
+          </div>
+          <div class="callout">
+            <div class="label">Customer issue</div>
+            <p class="pre-wrap" id="issueText">{{ ticket.issue_description }}</p>
+          </div>
+          <dl class="kv-grid">
+            <div><dt>Customer</dt><dd>{{ ticket.customer_name }}</dd></div>
+            <div><dt>Email</dt><dd>{{ ticket.customer_email or 'Not provided' }}</dd></div>
+            <div><dt>Conversation</dt><dd><code>{{ ticket.conversation_id or 'Manual / direct' }}</code></dd></div>
+            <div><dt>Last updated</dt><dd id="ticketUpdatedTimestamp">{{ ticket.updated_at }}</dd></div>
+          </dl>
+        </section>
+
+        <section class="table-card card-pad">
+          <h3 class="section-title">Chatbot transcript</h3>
+          <div id="transcriptContainer" class="transcript"></div>
+        </section>
+
+        <section class="table-card card-pad">
+          <h3 class="section-title">Internal notes &amp; activity</h3>
+          <div id="notesContainer" class="notes-timeline"></div>
+          <form id="addNoteForm" class="inline-form top-gap">
+            <label class="sr-only" for="newNoteInput">Internal note</label>
+            <input type="text" id="newNoteInput" class="form-control" placeholder="Add an internal note (agents only)…" maxlength="2000" required>
+            <button type="submit" class="btn btn-secondary btn-sm">Add note</button>
+          </form>
+        </section>
+      </div>
+
+      <div>
+        <section class="table-card card-pad sticky">
+          <h3 class="section-title">Update ticket</h3>
+          <form id="ticketUpdateForm">
+            <div class="form-group">
+              <label for="statusSelect">Status</label>
+              <select id="statusSelect" class="form-control">
+                {% for s in ['Open', 'In Progress', 'Waiting for Customer', 'Resolved', 'Closed'] %}
+                <option value="{{ s }}" {% if ticket.status == s %}selected{% endif %}>{{ s }}</option>
+                {% endfor %}
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="prioritySelect">Priority</label>
+              <select id="prioritySelect" class="form-control">
+                {% for p in ['Low', 'Medium', 'High', 'Urgent'] %}
+                <option value="{{ p }}" {% if ticket.priority == p %}selected{% endif %}>{{ p }}</option>
+                {% endfor %}
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="assignAgentInput">Assigned agent (username)</label>
+              <input type="text" id="assignAgentInput" class="form-control" value="{{ ticket.assigned_agent or '' }}" maxlength="32" placeholder="Leave blank to unassign">
+            </div>
+            <div class="form-group">
+              <label for="resolutionNotesTextarea">Resolution notes</label>
+              <textarea id="resolutionNotesTextarea" class="form-control" rows="5" maxlength="5000" placeholder="What was done to resolve this?"></textarea>
+            </div>
+            <div class="btn-row">
+              <button type="submit" id="saveTicketBtn" class="btn btn-primary btn-block">Save changes</button>
+            </div>
+          </form>
+        </section>
+      </div>
+    </div>
+  </main>
+
+  <div id="toastContainer" class="toast-container" aria-live="assertive"></div>
+  <script src="/static/js/common.js"></script>
+  <script src="/static/js/ticket-details.js"></script>
+</body>
+</html>

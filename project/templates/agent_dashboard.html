@@ -1,0 +1,121 @@
+{% set title = "Agent dashboard" %}
+{% include "_head.html" %}
+<body class="dashboard-container">
+
+  <header class="dashboard-navbar">
+    <div class="nav-brand">
+      <div class="brand-logo-icon brand-small" aria-hidden="true">🛡️</div>
+      <h1 class="nav-title">Support operations console</h1>
+    </div>
+    <div class="user-profile">
+      <div class="profile-info">
+        <div class="profile-name">{{ agent.full_name }}</div>
+        <div class="profile-role">@{{ agent.username }} • {{ 'Administrator' if agent.access_level == 'admin' else 'Support agent' }}</div>
+      </div>
+      {% if agent.access_level == 'admin' %}<a href="/admin" class="btn btn-outline btn-sm">⚙️ Admin</a>{% endif %}
+      <a href="/" class="btn btn-outline btn-sm">💬 Customer chat</a>
+      <a href="/agent/change-password" class="btn btn-outline btn-sm">🔑 Password</a>
+      <button id="agentLogoutBtn" class="btn btn-secondary btn-sm" type="button">Sign out</button>
+    </div>
+  </header>
+
+  <main class="dashboard-content">
+    <nav class="tabs" role="tablist" aria-label="Sections">
+      <button class="tab active" role="tab" aria-selected="true" data-tab="tickets" type="button">Support tickets</button>
+      <button class="tab" role="tab" aria-selected="false" data-tab="orders" type="button">Orders &amp; refunds</button>
+    </nav>
+
+    <section id="tab-tickets" data-section>
+      <section class="metrics-grid" aria-label="Ticket overview">
+        <div class="metric-card"><div><div class="metric-title">Total tickets</div><div id="statTotal" class="metric-value">0</div></div><div class="metric-icon blue">📋</div></div>
+        <div class="metric-card"><div><div class="metric-title">Open</div><div id="statOpen" class="metric-value">0</div></div><div class="metric-icon blue">⚡</div></div>
+        <div class="metric-card"><div><div class="metric-title">In progress</div><div id="statInProgress" class="metric-value">0</div></div><div class="metric-icon amber">⏳</div></div>
+        <div class="metric-card"><div><div class="metric-title">Resolved</div><div id="statResolved" class="metric-value">0</div></div><div class="metric-icon green">✅</div></div>
+        <div class="metric-card"><div><div class="metric-title">High / urgent (active)</div><div id="statUrgent" class="metric-value">0</div></div><div class="metric-icon rose">🚨</div></div>
+      </section>
+
+      <section class="toolbar-card">
+        <div class="filter-group">
+          <input type="search" id="searchInput" class="form-control" placeholder="Search ticket ID, customer, email, or text…" maxlength="100">
+          <select id="statusFilter" class="form-control select-narrow" aria-label="Filter by status">
+            <option value="All">All statuses</option>
+            <option>Open</option><option>In Progress</option><option>Waiting for Customer</option>
+            <option>Resolved</option><option>Closed</option>
+          </select>
+          <select id="priorityFilter" class="form-control select-narrow" aria-label="Filter by priority">
+            <option value="All">All priorities</option>
+            <option>Urgent</option><option>High</option><option>Medium</option><option>Low</option>
+          </select>
+          <button id="applyFiltersBtn" class="btn btn-primary btn-sm" type="button">Filter</button>
+          <button id="resetFiltersBtn" class="btn btn-secondary btn-sm" type="button">Reset</button>
+        </div>
+        <button id="refreshTicketsBtn" class="btn btn-outline btn-sm" type="button">🔄 Refresh</button>
+      </section>
+
+      <section class="table-card">
+        <div class="table-responsive">
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>Ticket</th><th>Customer</th><th>Issue</th><th>Category</th>
+                <th>Priority</th><th>Status</th><th>Assigned</th><th>Created</th><th></th>
+              </tr>
+            </thead>
+            <tbody id="ticketsTableBody"></tbody>
+          </table>
+        </div>
+        <div class="pagination-container">
+          <div id="paginationInfo" class="muted small">Loading…</div>
+          <div class="btn-row">
+            <button id="prevPageBtn" class="btn btn-secondary btn-sm" type="button" disabled>&larr; Previous</button>
+            <button id="nextPageBtn" class="btn btn-secondary btn-sm" type="button" disabled>Next &rarr;</button>
+          </div>
+        </div>
+      </section>
+    </section>
+
+    <section id="tab-orders" data-section hidden>
+      <section class="toolbar-card">
+        <div class="filter-group">
+          <input type="search" id="orderSearch" class="form-control" placeholder="Order ID or customer email…" maxlength="100">
+          <select id="orderPaymentFilter" class="form-control select-narrow" aria-label="Filter by payment status">
+            <option value="All">All payment states</option>
+            <option value="unpaid">Unpaid</option><option value="pending">Pending</option>
+            <option value="paid">Paid</option><option value="partially_refunded">Partially refunded</option>
+            <option value="refunded">Refunded</option><option value="failed">Failed</option>
+          </select>
+          <button id="orderSearchBtn" class="btn btn-primary btn-sm" type="button">Search</button>
+        </div>
+      </section>
+
+      <div class="orders-layout">
+        <section class="table-card">
+          <div class="table-responsive">
+            <table class="data-table">
+              <thead><tr><th>Order</th><th>Customer</th><th>Total</th><th>Status</th><th>Payment</th></tr></thead>
+              <tbody id="ordersTableBody"></tbody>
+            </table>
+          </div>
+          <div class="pagination-container">
+            <div id="orderPaginationInfo" class="muted small"></div>
+            <div class="btn-row">
+              <button id="orderPrevBtn" class="btn btn-secondary btn-sm" type="button" disabled>&larr; Previous</button>
+              <button id="orderNextBtn" class="btn btn-secondary btn-sm" type="button" disabled>Next &rarr;</button>
+            </div>
+          </div>
+        </section>
+
+        <aside class="table-card detail-panel" id="orderDetail" aria-live="polite">
+          <p class="muted">Select an order to see its payments, refunds and linked tickets.</p>
+        </aside>
+      </div>
+    </section>
+  </main>
+
+  <div id="toastContainer" class="toast-container" aria-live="assertive"></div>
+
+  <script src="/static/js/common.js"></script>
+  <script src="/static/js/dashboard.js"></script>
+  <script src="/static/js/orders.js"></script>
+</body>
+</html>

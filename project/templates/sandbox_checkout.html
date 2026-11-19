@@ -1,0 +1,27 @@
+{% set title = "Sandbox checkout" %}
+{% include "_head.html" %}
+<body>
+<div class="login-shell">
+  <div class="login-card">
+    <div class="login-header">
+      <div class="brand-logo-icon" aria-hidden="true">🧪</div>
+      <h1 class="page-title">Sandbox checkout</h1>
+      <p class="muted">This is a local simulator that stands in for a real payment provider. It is disabled in production.</p>
+    </div>
+    <div class="login-body">
+      <p><strong>Order:</strong> {{ payment.order_id }}</p>
+      <p><strong>Amount:</strong> {{ amount }}</p>
+      <p class="muted small">Status: {{ payment.status }}</p>
+      {% if payment.status == 'pending' %}
+      <form method="post" action="/payments/sandbox/{{ payment.provider_session_id }}/complete" class="stack">
+        <button class="btn btn-primary btn-block" name="outcome" value="success" type="submit">Simulate successful payment</button>
+        <button class="btn btn-secondary btn-block" name="outcome" value="cancelled" type="submit">Simulate cancellation</button>
+      </form>
+      {% else %}
+        <p>This session is already {{ payment.status }}.</p>
+      {% endif %}
+    </div>
+  </div>
+</div>
+</body>
+</html>

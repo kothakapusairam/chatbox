@@ -1,0 +1,37 @@
+{% set title = "Agent sign in" %}
+{% include "_head.html" %}
+<body class="login-page">
+<div class="login-shell">
+  <div class="login-card">
+    <div class="login-header">
+      <div class="brand-logo-icon" aria-hidden="true">🛡️</div>
+      <h1 class="page-title">Support Agent Portal</h1>
+      <p class="muted">Sign in to manage escalations and customer support tickets.</p>
+    </div>
+    <div class="login-body">
+      <form id="agentLoginForm" novalidate>
+        <div class="form-group">
+          <label for="usernameInput">Agent username</label>
+          <input type="text" id="usernameInput" class="form-control" autocomplete="username" autofocus required maxlength="64">
+        </div>
+        <div class="form-group">
+          <label for="passwordInput">Password</label>
+          <input type="password" id="passwordInput" class="form-control" autocomplete="current-password" required maxlength="256">
+        </div>
+        <div id="loginErrorMsg" class="alert alert-error" role="alert" hidden></div>
+        <button type="submit" id="loginBtn" class="btn btn-primary btn-block">Sign in</button>
+        {% if demo_mode %}
+        <div class="demo-credentials-box">
+          <strong>Local demo:</strong> the first administrator's password is written to
+          <code>instance/initial_admin_password.txt</code> on first start. You will be asked to change it at sign-in.
+        </div>
+        {% endif %}
+        <p class="center top-gap"><a href="/">← Back to customer chat</a></p>
+      </form>
+    </div>
+  </div>
+</div>
+<script src="/static/js/common.js"></script>
+<script src="/static/js/login.js"></script>
+</body>
+</html>
